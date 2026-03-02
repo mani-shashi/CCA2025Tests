@@ -1,0 +1,33 @@
+@model IEnumerable<dynamic>
+
+<h2>Search Results</h2>
+
+@if (Model == null || !Model.Any())
+{
+    <p>No results found.</p>
+}
+else
+{
+    <table border="1">
+        <tr>
+            <th>FlightId</th>
+            <th>FlightName</th>
+            <th>Source</th>
+            <th>Destination</th>
+            <th>TotalCost</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.FlightId</td>
+                <td>@item.FlightName</td>
+                <td>@item.Source</td>
+                <td>@item.Destination</td>
+                <td>@item.TotalCost</td>
+            </tr>
+        }
+    </table>
+}
+
+<a href="/Flight/Index">Back</a>

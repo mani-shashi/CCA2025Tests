@@ -3,7 +3,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddSingleton<IBookRepository, MemoryBookRepository>();
+// builder.Services.AddSingleton<IBookRepository, MemoryBookRepository>();
+
+builder.Services.AddDbContext<LibraryDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<IBookRepository, SqlBookRepository>();
 
 var app = builder.Build();
 

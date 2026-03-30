@@ -1,1 +1,89 @@
-/* You can add global styles to this file, and also import other style files */
+// Custom Theming for Angular Material
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+// Define color palettes
+$primary-palette: mat.define-palette(mat.$deep-purple-palette);
+$accent-palette: mat.define-palette(mat.$amber-palette, A200, A100, A400);
+$warn-palette: mat.define-palette(mat.$red-palette);
+
+// Light Theme
+$light-theme: mat.define-light-theme((
+  color: (
+    primary: $primary-palette,
+    accent: $accent-palette,
+    warn: $warn-palette,
+  ),
+  typography: mat.define-typography-config(),
+  density: 0
+));
+
+// Dark Theme
+$dark-theme: mat.define-dark-theme((
+  color: (
+    primary: $primary-palette,
+    accent: $accent-palette,
+    warn: $warn-palette,
+  ),
+  typography: mat.define-typography-config(),
+  density: 0
+));
+
+// Apply light theme by default
+@include mat.all-component-themes($light-theme);
+
+// Dark theme class
+.dark-theme {
+  @include mat.all-component-colors($dark-theme);
+
+  background-color: #121212;
+  color: #ffffff;
+
+  .info-row {
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+  }
+}
+
+// Global styles
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+// Responsive utilities
+.hide-mobile {
+  @media (max-width: 599px) {
+    display: none !important;
+  }
+}
+
+.hide-desktop {
+  @media (min-width: 600px) {
+    display: none !important;
+  }
+}
+
+// Custom scrollbar
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.dark-theme ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+}
